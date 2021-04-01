@@ -845,8 +845,6 @@ endif()
 
 if(USE_PHYSICS_PHYSX)
     cocos_source_files(
-        cocos/physics/PhysXBindings.h
-        cocos/physics/PhysXBindings.cpp
         cocos/physics/PhysicsSDK.h
         cocos/physics/PhysicsSelector.h
         cocos/physics/sdk/World.h
