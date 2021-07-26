@@ -32,7 +32,7 @@ void Node::updateWorldTransform() {
     if (!getDirtyFlag()) {
         return;
     }
-    uint32_t   i    = 0;
+    int   i    = 0;
     Node *     curr = this;
     Mat3       mat3;
     Mat3       m43;
@@ -63,7 +63,7 @@ void Node::updateWorldTransform() {
                 Mat4::fromRTS(childLayout->localRotation, childLayout->localPosition, childLayout->localScale, &childLayout->worldMatrix);
                 Mat4::multiply(currLayout->worldMatrix, childLayout->worldMatrix, &childLayout->worldMatrix);
                 if (dirtyBits & static_cast<uint32_t>(TransformBit::ROTATION)) {
-                    Quaternion::multiply(currLayout->worldRotation, childLayout->localRotation, &currLayout->worldRotation);
+                    Quaternion::multiply(currLayout->worldRotation, childLayout->localRotation, &childLayout->worldRotation);
                 }
                 quat = childLayout->worldRotation;
                 quat.conjugate();
@@ -85,7 +85,7 @@ void Node::updateWorldTransform() {
                 }
                 if (dirtyBits & static_cast<uint32_t>(TransformBit::SCALE)) {
                     childLayout->worldScale.set(childLayout->localScale);
-                    Mat4::fromRTS(childLayout->localRotation, childLayout->localPosition, childLayout->localScale, &childLayout->worldMatrix);
+                    Mat4::fromRTS(childLayout->worldRotation, childLayout->worldPosition, childLayout->worldScale, &childLayout->worldMatrix);
                 }
             }
         }
